@@ -1,17 +1,17 @@
-import React from 'react'
-import * as firebase from 'firebase'
-import {createAppContainer, createSwitchNavigator} from 'react-navigation'
-import {createStackNavigator} from 'react-navigation-stack'
-import {createBottomTabNavigator} from "react-navigation-tabs"
+import React from "react";
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import * as firebase from 'firebase';
+import {createBottomTabNavigator} from "react-navigation-tabs";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import LoadingScreen from './src/screens/LoadingScreen'
-import LoginScreen from './src/screens/LoginScreen'
-import RegisterScreen from './src/screens/RegisterScreen'
+import LoadingScreen from './src/screens/LoadingScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
 // import HomeScreen from './src/screens/HomeScreen'
-import ProfileScreen from './src/screens/ProfileScreen'
-import ChatScreen from './src/screens/ChatScreen'
-import LocationScreen from './src/screens/LocationScreen'
+import ProfileScreen from './src/screens/ProfileScreen';
+import ChatScreen from './src/screens/ChatScreen';
+import LocationScreen from './src/screens/LocationScreen';
 
 
 var firebaseConfig = {
@@ -86,10 +86,10 @@ export default createAppContainer(
     {
       Loading: LoadingScreen,
       App: AppTabNavigator,
-      Auth: AuthStack,
+      Auth: AuthStack
     },
     {
-      initialRouteName: "Loading",
+      initialRouteName: "Loading"
     },
   )
 )
