@@ -1,8 +1,12 @@
 import React from "react"
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, StatusBar } from "react-native"
+// import {Ionicons} from '@expo/vector-icons'
 import * as firebase from 'firebase'
 
 export default class RegisterScreen extends React.Component {
+    static navigationOptions = {
+        header: null
+    }
     state = {
         name: "",
         email: "",
@@ -24,6 +28,10 @@ export default class RegisterScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar barStyle="light-content"></StatusBar>
+                {/* <TouchableOpacity>
+                    <Ionicons name="ios-arrow-round-back" size={32} color="#FFF"></Ionicons>
+                </TouchableOpacity> */}
                <Text style={styles.greeting}>{`Hello.\nSign up to get started`}</Text>
 
             <View style={styles.errorMessage}>
@@ -64,7 +72,7 @@ export default class RegisterScreen extends React.Component {
                 <Text style={{ color: "#FFF", fontWeight: "500"}}>Sign Up</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ alignSelf: "center", marginTop: 32}}>
+            <TouchableOpacity style={{ alignSelf: "center", marginTop: 32}} onPress={() => this.props.navigation.navigate("Login")}>
                 <Text style={{ color: "#414959", fontSize: 13}}>
                         New to SocialApp? <Text style={{ fontWeight:"500", color: "#E9446A"}}>Login</Text>
                 </Text>
@@ -111,7 +119,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 30,
-        backgroundColor : "#E9446A",
+        backgroundColor : "#3498db",
         borderRadius: 4,
         height: 52,
         alignItems: "center",

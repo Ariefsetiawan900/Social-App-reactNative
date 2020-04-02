@@ -1,8 +1,12 @@
 import React from "react"
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar, LayoutAnimation } from "react-native"
+
 import * as firebase from 'firebase'
 
 export default class LoginScreen extends React.Component {
+    static navigationOptions = {
+        header: null
+    }
     state = {
         email: "",
         password: "",
@@ -23,6 +27,7 @@ export default class LoginScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar barStyle="light-content"></StatusBar>
                <Text style={styles.greeting}>{`Hello again.\nWelcome back`}</Text>
 
             <View style={styles.errorMessage}>
@@ -30,7 +35,7 @@ export default class LoginScreen extends React.Component {
             </View>
 
             <View style={styles.form}>
-                <View>
+                <View >
                     <Text style={styles.inputTitle}>Email Addres</Text>
                     <TextInput style={styles.input} 
                     autoCapitalize="none"
@@ -68,10 +73,10 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     greeting: {
-        marginTop: 32,
+        marginTop: 50,
         fontSize: 18,
         fontWeight: "400",
-        textAlign: "center"
+        textAlign: "center",
     },
     errorMessage: {
         height: 72,
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 30,
-        backgroundColor : "#E9446A",
+        backgroundColor : "#3498db",
         borderRadius: 4,
         height: 52,
         alignItems: "center",
