@@ -6,7 +6,7 @@ import * as  firebase from "firebase"
 export default class ProfileScreen extends React.Component {
     state = {
         displayName: "",
-        biodata: "",
+        status: "",
     }
 
     componentDidMount() {
@@ -17,8 +17,12 @@ export default class ProfileScreen extends React.Component {
         firebase.auth().signOut();
             this.props.navigation.navigate('LoginScreen')
     }
+
+    // editHandler = () => {
+    //     this.props.navigation.navigate('editProfile')
+    // }
     profileHandler = async () => {
-        const { displayName, biodata} = this.state;
+        const { displayName, status} = this.state;
         const uid = firebase.auth().currentUser.uid;
         const email = firebase.auth().currentUser.email;
         const ref = firebase.database().ref(`/user/${uid}`);
@@ -28,7 +32,7 @@ export default class ProfileScreen extends React.Component {
                 uid: uid,
                 email: email,
                 displayName,
-                biodata,
+                status,
             })
             ToastAndroid.showWithGravity(
                 'Data Updated',
@@ -42,16 +46,18 @@ export default class ProfileScreen extends React.Component {
         // LayoutAnimation.easeInEaseOut()
         return (
             <View style={styles.container}>
-                <View style={styles.containerHeader}
-                ></View>
+                <View style={styles.containerHeader}>
+                    {/* <Text onPress={this.editHandler}>Edit Profile </Text>
+                    <Text onPress={this.signOutUser}>Logout </Text> */}
+                </View>
                 <View style={styles.containerBottom}>
                     <View style={styles.circle} />
                     <Text>Hi, {this.state.displayName}</Text>
                     <TextInput
-                        value={this.state.biodata}
-                        onChangeText={value => this.setState({biodata: value})}
+                        value={this.state.status}
+                        onChangeText={value => this.setState({status: value})}
                         style={styles.formInput}
-                        placeholder="Biodata"
+                        placeholder="Status"
                     />
                     <TouchableOpacity
                         onPress={this.profileHandler}
