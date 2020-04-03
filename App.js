@@ -33,7 +33,7 @@ const AppTabNavigator = createBottomTabNavigator(
       screen: LocationScreen,
       navigationOptions: {
         tabBarIcon: ({tintColor}) => (
-          <Icon color={'#fff'} name="wpexplorer" size={25} />
+          <Icon  name='compass' color={'#fff'} size={25} color={tintColor} />
         ),
         header: null,
       },

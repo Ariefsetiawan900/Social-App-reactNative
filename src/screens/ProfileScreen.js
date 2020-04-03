@@ -1,11 +1,69 @@
 import React from "react"
-import { View, Text, StyleSheet} from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, ToastAndroid, TextInput } from "react-native"
+import * as  firebase from "firebase"
+
 
 export default class ProfileScreen extends React.Component {
+    state = {
+        displayName: "",
+        biodata: "",
+    }
+
+    componentDidMount() {
+        const { displayName } = firebase.auth().currentUser;
+        this.setState({displayName})
+    }
+    signOutUser = () => {
+        firebase.auth().signOut();
+            this.props.navigation.navigate('LoginScreen')
+    }
+    profileHandler = async () => {
+        const { displayName, biodata} = this.state;
+        const uid = firebase.auth().currentUser.uid;
+        const email = firebase.auth().currentUser.email;
+        const ref = firebase.database().ref(`/user/${uid}`);
+
+        setTimeout(async () => {
+            await ref.set({
+                uid: uid,
+                email: email,
+                displayName,
+                biodata,
+            })
+            ToastAndroid.showWithGravity(
+                'Data Updated',
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+            )
+        }, 3000)
+    }
+
     render() {
+        // LayoutAnimation.easeInEaseOut()
         return (
             <View style={styles.container}>
-                <Text>ProfileScreen screen dong</Text>
+                <View style={styles.containerHeader}
+                ></View>
+                <View style={styles.containerBottom}>
+                    <View style={styles.circle} />
+                    <Text>Hi, {this.state.displayName}</Text>
+                    <TextInput
+                        value={this.state.biodata}
+                        onChangeText={value => this.setState({biodata: value})}
+                        style={styles.formInput}
+                        placeholder="Biodata"
+                    />
+                    <TouchableOpacity
+                        onPress={this.profileHandler}
+                        style={styles.saveButton}>
+                            <Text style={{ color:'#fff', fontSize: 20, textAlign: 'center'}}>
+                                Save
+                            </Text>
+                        </TouchableOpacity>
+                <TouchableOpacity style={{marginTop: 32}} onPress={this.signOutUser}>
+                    <Text>Logout</Text>
+                </TouchableOpacity>
+            </View>
             </View>
         )
     }
@@ -14,7 +72,39 @@ export default class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: "center",
         alignItems: "center",
-        justifyContent: "center"
-    }
+        backgroundColor: "blue"
+    },
+    containerHeader: {
+        padding: 40,
+        height: '20%',
+        width: '100%',
+    },
+    containerBottom: {
+        padding: 40,
+        width: '100%',
+        height: '80%',
+        flexDirection: 'column',
+        // alignItems: 'center',
+        borderTopRightRadius: 25,
+        borderTopLeftRadius: 25,
+        backgroundColor: 'white',
+        // justifyContent: 'center',
+        alignItems: 'center',
+    },
+    circle: {
+        backgroundColor: 'red',
+        width: 160,
+        height: 160,
+        borderRadius: 100,
+        top: -120,
+    },
+    saveButton: {
+        marginTop: 10,
+        width: '100%',
+        backgroundColor: 'red',
+        borderRadius: 15,
+        padding: 15,
+    },
 })
