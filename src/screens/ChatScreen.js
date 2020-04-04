@@ -93,7 +93,7 @@ export default class Contact extends Component {
         this.getAllUser();
       }
     });
-    this.props.navigation.push('ChatScreen', {
+    this.props.navigation.push('Chat', {
       uid: friendUID,
     });
   };

@@ -12,6 +12,7 @@ import RegisterScreen from './src/screens/RegisterScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import LocationScreen from './src/screens/LocationScreen';
+import editProfile from './src/screens/editProfile'
 
 
 var firebaseConfig = {
@@ -33,7 +34,7 @@ const AppTabNavigator = createBottomTabNavigator(
       screen: LocationScreen,
       navigationOptions: {
         tabBarIcon: ({tintColor}) => (
-          <Icon  name='compass' color={'#fff'} size={25} color={tintColor} />
+          <Icon  color={tintColor} name='compass' color={'#fff'} size={25}  />
         ),
         header: null,
       },
@@ -81,12 +82,18 @@ const AuthStack = createStackNavigator({
   Register: RegisterScreen
 })
 
+const SetupStack = createStackNavigator({
+  editProfile : editProfile
+})
+
+
 export default createAppContainer(
   createSwitchNavigator(
     {
       Loading: LoadingScreen,
       App: AppTabNavigator,
-      Auth: AuthStack
+      Auth: AuthStack,
+      Setup: SetupStack,
     },
     {
       initialRouteName: "Loading"

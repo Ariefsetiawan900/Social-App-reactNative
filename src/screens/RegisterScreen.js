@@ -26,7 +26,7 @@ export default class RegisterScreen extends React.Component {
             const uid = await firebase.auth().currentUser.uid
             const email = await firebase.auth().currentUser.email
             const ref = await firebase.database().ref(`/user/${uid}`)
-            const imageUrl = 'https://cdn.myanimelist.net/images/characters/9/310307.jpg'
+            const imageUrl = 'https://clipartart.com/images/clipart-profile-2.jpg'
             await ref.set({
                 uid: uid,
                 email:email,

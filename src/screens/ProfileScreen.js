@@ -13,7 +13,7 @@ export default class ProfileScreen extends React.Component {
 
     componentDidMount() {
         const { displayName } = firebase.auth().currentUser;
-        this.setState({displayName})
+        this.setState({displayName : displayName})
         this.getUserData()
         console.log('imgku', this.state.imageUrl)
         console.log('emaillo', this.state.eamil);
@@ -44,13 +44,13 @@ export default class ProfileScreen extends React.Component {
     //     const email = firebase.auth().currentUser.email;
     //     const ref = firebase.database().ref(`/user/${uid}`);
 
-    //     setTimeout(async () => {
-    //         await ref.set({
-    //             uid: uid,
-    //             email: email,
-    //             displayName,
-    //             status,
-    //         })
+        // setTimeout(async () => {
+        //     await ref.set({
+        //         uid: uid,
+        //         email: email,
+        //         displayName,
+        //         status,
+        //     })
     //         ToastAndroid.showWithGravity(
     //             'Data Updated',
     //             ToastAndroid.SHORT,

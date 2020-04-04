@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ToastAndroid, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-class EditProfile extends Component {
+class editProfile extends Component {
     state = {
         displayName:"",
         imageUrl:"",
@@ -40,7 +40,7 @@ class EditProfile extends Component {
                 <View style={styles.imageContainer}>
                     <Image
                         style={styles.imageIcon}
-                        source={require('lokasi')} 
+                        source={require('../assets/draw.png')} 
                         />
                 </View>
                 <View style={styles.headerContainer}>
@@ -83,7 +83,7 @@ class EditProfile extends Component {
     }
 }
 
-export default EditProfile;
+export default editProfile;
 
 const styles = StyleSheet.create({
     container: {
@@ -158,5 +158,6 @@ const styles = StyleSheet.create({
          marginTop: 10,
          width: '100%',
      },
-     errorText: { textAlign: 'center,', color: 'red', fontSize: 16 },
+     errorText: { 
+         textAlign: 'center', color: 'red', fontSize: 16 },
     })
