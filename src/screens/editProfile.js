@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ToastAndroid, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import * as firebase from 'firebase'
 
 class editProfile extends Component {
     state = {
@@ -10,13 +11,14 @@ class editProfile extends Component {
     }
     componentDidMount() {
         const { displayName } = firebase.auth().currentUser
-        this.setState({ displayName })
+        this.setState({ displayName : displayName })
     }
     profileHandler = async () => {
         const { displayName, status, imageUrl, phone } = this.state
         const uid = firebase.auth().currentUser.uid
         const email = firebase.auth().currentUser.email
         const ref = firebase.database().ref(`/user/${uid}`)
+        
 
         setTimeout(async () => {
             await ref.set({
@@ -26,6 +28,7 @@ class editProfile extends Component {
                 status,
                 imageUrl,
                 phone,
+                
             })
             ToastAndroid.showWithGravity(
                 'Data Updated',
@@ -44,7 +47,7 @@ class editProfile extends Component {
                         />
                 </View>
                 <View style={styles.headerContainer}>
-        <Text style={{ fontSize: 30 }}>Hi, {this.state,displayName}</Text>
+        <Text style={{ fontSize: 30 }}>Hi, {this.state.displayName}</Text>
         <Text style={{ fontSize: 17, color: '#262626' }}>
             Configure Your Profile
         </Text>
