@@ -107,12 +107,12 @@ render() {
         <View
           style={{
             height: 60,
-            backgroundColor: '#FFD700',
+            backgroundColor: '#0e76a8',
             alignItems: 'center',
             paddingHorizontal: 30,
             flexDirection: 'row',
           }}>
-          <Text style={{fontSize: 20, color: '#000'}}>Friend List</Text>
+          <Text style={{fontSize: 20, color: 'white'}}>Friend List</Text>
         </View>
         <ScrollView style={{flex: 0.5}}>
           {this.state.data.map(data => {
@@ -162,7 +162,7 @@ render() {
                           height: 8,
                           width: 8,
                           borderRadius: 8,
-                          backgroundColor: '#FFD700',
+                          backgroundColor: 'lightgreen',
                           alignSelf: 'center',
                           marginRight: '5%',
                           marginTop: '5%',

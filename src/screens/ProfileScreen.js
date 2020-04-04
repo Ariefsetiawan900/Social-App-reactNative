@@ -64,12 +64,17 @@ export default class ProfileScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.containerHeader}>
-                    <Text onPress={this.editHandler}>Edit Profile </Text>
-                    <Text onPress={this.signOutUser}>Logout </Text>
+                <Image style={styles.circle} source={{ uri: this.state.imageUrl}} />
+                    {/* <Text onPress={this.editHandler}>Edit Profile </Text>
+                    <Text onPress={this.signOutUser}>Logout </Text> */}
                 </View>
                 <View style={styles.containerBottom}>
-                   <Image style={styles.circle} source={{ uri: this.state.imageUrl}} />
-                    <Text>Hi, {this.state.displayName}</Text>
+                    <Text style={styles.textTop}>Hi, {this.state.displayName}</Text>
+                    <View style={styles.textBottom}>
+                    <Text onPress={this.editHandler} >Edit Profile  | </Text>
+                    <Text onPress={this.signOutUser} >Logout </Text>
+                    </View>
+                    
                     {/* <TextInput
                         value={this.state.status}
                         onChangeText={value => this.setState({status: value})}
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "blue"
+        backgroundColor: "#0e76a8"
     },
     containerHeader: {
         padding: 40,
@@ -115,13 +120,24 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         // justifyContent: 'center',
         alignItems: 'center',
+        top: 70
     },
     circle: {
         backgroundColor: 'red',
         width: 160,
         height: 160,
         borderRadius: 100,
-        top: -120,
+        top: -30,
+        alignSelf: 'center'
+    },
+    textTop: {
+        top: -20,
+        fontSize: 30
+    },
+    textBottom: {
+        display: "flex",
+        flexDirection: 'row',
+        
     },
     saveButton: {
         marginTop: 10,

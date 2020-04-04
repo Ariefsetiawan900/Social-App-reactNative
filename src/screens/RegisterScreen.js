@@ -86,7 +86,7 @@ export default class RegisterScreen extends React.Component {
 
             <TouchableOpacity style={{ alignSelf: "center", marginTop: 32}} onPress={() => this.props.navigation.navigate("Login")}>
                 <Text style={{ color: "#414959", fontSize: 13}}>
-                        New to SocialApp? <Text style={{ fontWeight:"500", color: "#E9446A"}}>Login</Text>
+                        Have a SocialApp? <Text style={{ fontWeight:"500", color: "#E9446A"}}>Login</Text>
                 </Text>
             </TouchableOpacity>
             </View>
