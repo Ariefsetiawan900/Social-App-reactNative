@@ -23,7 +23,7 @@ export default class Contact extends Component {
 
   getAllUser = async () => {
     const uid = firebase.auth().currentUser.uid;
-    const ref = firebase.database().ref('/users');
+    const ref = firebase.database().ref('/user');
 
     await ref.on('value', async snapshot => {
       let data = [];
@@ -132,7 +132,7 @@ render() {
                 }}
                 key={data.uid}>
                 <Image
-                  source={{uri: `${data.data.urlImage}`}}
+                  source={{uri: `${data.data.imageUrl}`}}
                   style={{
                     height: 60,
                     width: 60,
@@ -141,7 +141,7 @@ render() {
                   }}
                 />
                 <View>
-                  <Text style={{fontSize: 16}}>{data.data.name}</Text>
+                  <Text style={{fontSize: 16}}>{data.data.displayName}</Text>
                   <View style={{flexDirection: 'row'}}>
                     {data.data.status == 'offline' ? (
                       <View

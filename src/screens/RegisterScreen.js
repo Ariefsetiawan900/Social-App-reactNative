@@ -22,6 +22,18 @@ export default class RegisterScreen extends React.Component {
                 displayName: this.state.name
             })
         })
+        .then(async () => {
+            const uid = await firebase.auth().currentUser.uid
+            const email = await firebase.auth().currentUser.email
+            const ref = await firebase.database().ref(`/user/${uid}`)
+            const imageUrl = 'https://cdn.myanimelist.net/images/characters/9/310307.jpg'
+            await ref.set({
+                uid: uid,
+                email:email,
+                displayName: this.state.name,
+                imageUrl: imageUrl
+            })
+        })
         .catch(error => this.setState({ errorMessage: error.message}))
     }
 

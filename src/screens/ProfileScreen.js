@@ -1,59 +1,76 @@
 import React from "react"
-import { View, Text, StyleSheet, TouchableOpacity, ToastAndroid, TextInput } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, ToastAndroid, TextInput, Image } from "react-native"
 import * as  firebase from "firebase"
+
 
 
 export default class ProfileScreen extends React.Component {
     state = {
         displayName: "",
         status: "",
+        email: ""
     }
 
     componentDidMount() {
         const { displayName } = firebase.auth().currentUser;
         this.setState({displayName})
+        this.getUserData()
+        console.log('imgku', this.state.imageUrl)
+        console.log('emaillo', this.state.eamil);
+        
+        
     }
     signOutUser = () => {
-        firebase.auth().signOut();
+        firebase
+        .auth()
+        .signOut().then(() => {
             this.props.navigation.navigate('LoginScreen')
+        })     
     }
-
-    // editHandler = () => {
-    //     this.props.navigation.navigate('editProfile')
-    // }
-    profileHandler = async () => {
-        const { displayName, status} = this.state;
+    getUserData = () => {
         const uid = firebase.auth().currentUser.uid;
-        const email = firebase.auth().currentUser.email;
-        const ref = firebase.database().ref(`/user/${uid}`);
-
-        setTimeout(async () => {
-            await ref.set({
-                uid: uid,
-                email: email,
-                displayName,
-                status,
-            })
-            ToastAndroid.showWithGravity(
-                'Data Updated',
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER
-            )
-        }, 3000)
+        let ref = firebase.database().ref(`/user/${uid}`);
+        ref.on('value', snapshot => {
+            this.setState({ imageUrl: snapshot.val() != null || '' ? snapshot.val().imageUrl: ''})
+        })
     }
+
+    editHandler = () => {
+        this.props.navigation.navigate('editProfile')
+    }
+    // profileHandler = async () => {
+    //     const { displayName, status} = this.state;
+    //     const uid = firebase.auth().currentUser.uid;
+    //     const email = firebase.auth().currentUser.email;
+    //     const ref = firebase.database().ref(`/user/${uid}`);
+
+    //     setTimeout(async () => {
+    //         await ref.set({
+    //             uid: uid,
+    //             email: email,
+    //             displayName,
+    //             status,
+    //         })
+    //         ToastAndroid.showWithGravity(
+    //             'Data Updated',
+    //             ToastAndroid.SHORT,
+    //             ToastAndroid.CENTER
+    //         )
+    //     }, 3000)
+    // }
 
     render() {
         // LayoutAnimation.easeInEaseOut()
         return (
             <View style={styles.container}>
                 <View style={styles.containerHeader}>
-                    {/* <Text onPress={this.editHandler}>Edit Profile </Text>
-                    <Text onPress={this.signOutUser}>Logout </Text> */}
+                    <Text onPress={this.editHandler}>Edit Profile </Text>
+                    <Text onPress={this.signOutUser}>Logout </Text>
                 </View>
                 <View style={styles.containerBottom}>
-                    <View style={styles.circle} />
+                   <Image style={styles.circle} source={{ uri: this.state.imageUrl}} />
                     <Text>Hi, {this.state.displayName}</Text>
-                    <TextInput
+                    {/* <TextInput
                         value={this.state.status}
                         onChangeText={value => this.setState({status: value})}
                         style={styles.formInput}
@@ -68,7 +85,7 @@ export default class ProfileScreen extends React.Component {
                         </TouchableOpacity>
                 <TouchableOpacity style={{marginTop: 32}} onPress={this.signOutUser}>
                     <Text>Logout</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
             </View>
         )
